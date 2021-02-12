@@ -40,8 +40,7 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: DatePickerModel(
           currentTime: currentTime,
           maxTime: maxTime,
@@ -75,8 +74,7 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: TimePickerModel(
           currentTime: currentTime,
           locale: locale,
@@ -108,8 +106,7 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: Time12hPickerModel(
           currentTime: currentTime,
           locale: locale,
@@ -142,8 +139,7 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: DateTimePickerModel(
           currentTime: currentTime,
           minTime: minTime,
@@ -176,8 +172,7 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: pickerModel,
       ),
     );
@@ -224,14 +219,12 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
+    _animationController = BottomSheet.createAnimationController(navigator.overlay);
     return _animationController;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -280,12 +273,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   void refreshScrollOffset() {
 //    print('refreshScrollOffset ${widget.pickerModel.currentRightIndex()}');
-    leftScrollCtrl = FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentLeftIndex());
-    middleScrollCtrl = FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentMiddleIndex());
-    rightScrollCtrl = FixedExtentScrollController(
-        initialItem: widget.pickerModel.currentRightIndex());
+    leftScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentLeftIndex());
+    middleScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentMiddleIndex());
+    rightScrollCtrl = FixedExtentScrollController(initialItem: widget.pickerModel.currentRightIndex());
   }
 
   @override
@@ -328,8 +318,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
     if (widget.route.showTitleActions) {
       return Column(
         children: <Widget>[
-          _renderTitleActionsView(theme),
           itemView,
+          _renderTitleActionsView(theme),
         ],
       );
     }
@@ -348,15 +338,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Expanded(
       flex: layoutProportion,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(3),
         height: theme.containerHeight,
         decoration: BoxDecoration(color: theme.backgroundColor ?? Colors.white),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
-            if (notification.depth == 0 &&
-                selectedChangedWhenScrollEnd != null &&
-                notification is ScrollEndNotification &&
-                notification.metrics is FixedExtentMetrics) {
+            if (notification.depth == 0 && selectedChangedWhenScrollEnd != null && notification is ScrollEndNotification && notification.metrics is FixedExtentMetrics) {
               final FixedExtentMetrics metrics = notification.metrics;
               final int currentItemIndex = metrics.itemIndex;
               selectedChangedWhenScrollEnd(currentItemIndex);
@@ -401,12 +388,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
         children: <Widget>[
           Container(
             child: widget.pickerModel.layoutProportions()[0] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.leftStringAtIndex,
-                    leftScrollCtrl,
-                    widget.pickerModel.layoutProportions()[0], (index) {
+                ? _renderColumnView(ValueKey(widget.pickerModel.currentLeftIndex()), theme, widget.pickerModel.leftStringAtIndex, leftScrollCtrl, widget.pickerModel.layoutProportions()[0], (index) {
                     widget.pickerModel.setLeftIndex(index);
                   }, (index) {
                     setState(() {
@@ -422,12 +404,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           Container(
             child: widget.pickerModel.layoutProportions()[1] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.middleStringAtIndex,
-                    middleScrollCtrl,
-                    widget.pickerModel.layoutProportions()[1], (index) {
+                ? _renderColumnView(ValueKey(widget.pickerModel.currentLeftIndex()), theme, widget.pickerModel.middleStringAtIndex, middleScrollCtrl, widget.pickerModel.layoutProportions()[1],
+                    (index) {
                     widget.pickerModel.setMiddleIndex(index);
                   }, (index) {
                     setState(() {
@@ -443,12 +421,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           ),
           Container(
             child: widget.pickerModel.layoutProportions()[2] > 0
-                ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
-                        widget.pickerModel.currentLeftIndex()),
-                    theme,
-                    widget.pickerModel.rightStringAtIndex,
-                    rightScrollCtrl,
+                ? _renderColumnView(ValueKey(widget.pickerModel.currentMiddleIndex() * 100 + widget.pickerModel.currentLeftIndex()), theme, widget.pickerModel.rightStringAtIndex, rightScrollCtrl,
                     widget.pickerModel.layoutProportions()[2], (index) {
                     widget.pickerModel.setRightIndex(index);
                   }, (index) {
@@ -466,52 +439,55 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   // Title View
   Widget _renderTitleActionsView(DatePickerTheme theme) {
-    final done = _localeDone();
-    final cancel = _localeCancel();
+    final done = _localeDone()?.toUpperCase();
+    final cancel = _localeCancel()?.toUpperCase();
 
     return Container(
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor ?? Colors.white,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            height: theme.titleHeight,
-            child: CupertinoButton(
-              pressedOpacity: 0.3,
-              padding: EdgeInsets.only(left: 16, top: 0),
-              child: Text(
-                '$cancel',
-                style: theme.cancelStyle,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              height: theme.btnHeight,
+              width: MediaQuery.of(context).size.width * .46,
+              child: RaisedButton.icon(
+                color: theme.cancelBtnColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (widget.route.onCancel != null) {
+                    widget.route.onCancel();
+                  }
+                },
+                label: Text('$cancel', style: theme.cancelStyle),
+                icon: Icon(Icons.close, color: Colors.white),
+                textColor: Colors.white,
+                splashColor: Colors.redAccent,
               ),
-              onPressed: () {
-                Navigator.pop(context);
-                if (widget.route.onCancel != null) {
-                  widget.route.onCancel();
-                }
-              },
             ),
-          ),
-          Container(
-            height: theme.titleHeight,
-            child: CupertinoButton(
-              pressedOpacity: 0.3,
-              padding: EdgeInsets.only(right: 16, top: 0),
-              child: Text(
-                '$done',
-                style: theme.doneStyle,
+            Container(
+              height: theme.btnHeight,
+              width: MediaQuery.of(context).size.width * .46,
+              child: RaisedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context, widget.pickerModel.finalTime());
+                  if (widget.route.onConfirm != null) {
+                    widget.route.onConfirm(widget.pickerModel.finalTime());
+                  }
+                },
+                color: theme.doneBtnColor,
+                label: Text('$done', style: theme.doneStyle),
+                icon: Icon(Icons.check, color: Colors.white),
+                textColor: Colors.white,
+                splashColor: Colors.greenAccent,
               ),
-              onPressed: () {
-                Navigator.pop(context, widget.pickerModel.finalTime());
-                if (widget.route.onConfirm != null) {
-                  widget.route.onConfirm(widget.pickerModel.finalTime());
-                }
-              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
